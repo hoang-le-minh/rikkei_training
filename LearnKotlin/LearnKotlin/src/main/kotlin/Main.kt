@@ -1,3 +1,6 @@
+import enum.Quality
+import enum.RequestError
+import model.User
 import javax.annotation.processing.Completion
 
 fun main(args: Array<String>) {
@@ -48,18 +51,84 @@ fun main(args: Array<String>) {
     println(getFullName("Hoang", "Le"))
     println("url = ${url(2, 3)}")
 
+    // let
     val map: Map<String, Int> = hashMapOf("Hoang" to 1, "Nam" to 2)
     map["key"]?.let {
         // Do something if map["key"] not null
         println("Value = $it")
     }
 
+    // apply
     val user = hashMapOf("name" to "Hoang", "gender" to "male")
     user.apply {
         this["name"] = "Quynh"
         this["gender"] = "female"
     }
     println("name: ${user["name"]}; gender: ${user["gender"]}")
+
+    // with
+    val user1 = User(1, "Hoang", "hoang@gmail.com")
+    with(user1){
+        name = "Minh"
+        email = "minh@gmail.com"
+    }
+    println(user1)
+
+    print("Nhap n: ")
+    val n: Int = readlnOrNull()?.toInt() ?: 0
+    val ketqua = when(n){
+        in 1..5 -> "1 <= n <= 5"
+        6, 8, 10 -> "n = 6 or 8 or 10"
+        else -> "Error"
+    }
+    println(ketqua)
+
+    // enum classes
+    val quality = Quality.GOOD
+    val qualityResult: String = when(quality){
+        Quality.BAD -> "Quality is Bad"
+        Quality.GOOD -> "Quality is Good"
+        Quality.NOMAL -> "Quality is Normal"
+        Quality.EXCELLENT -> "Quality is Excellent"
+    }
+    println(qualityResult)
+
+    val requestError = RequestError.BAD_REQUEST
+    println(requestError)
+    println(requestError.message)
+    println(requestError.lengthMessage())
+
+    // define key-value object
+    val person = object {
+        var name = "Hoang"
+        var age = 22
+        var gender = "male"
+
+        override fun toString(): String {
+            return "name: $name, age: $age, gender: $gender"
+        }
+    }
+    println(person)
+
+    // List
+    val listSports = listOf<String>("Football", "Volleyball") // read only
+    println(listSports)
+    // MutableList
+    val listNumber = mutableListOf<Int>(1, 2, 4, 5)
+    listNumber.add(2, 3)
+    listNumber.remove(2)
+    listNumber.add(6)
+    println(listNumber)
+    listNumber.forEach{
+        print("$it ")
+    }
+    if(listNumber.any{it < 3}){
+        println("\nAt least one number is lower than 3")
+    }
+    if(listNumber.all { it < 10 }){
+        println("All number of list is lower than 10")
+    }
+
 
 
 }
