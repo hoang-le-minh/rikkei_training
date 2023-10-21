@@ -1,6 +1,9 @@
 import enum.Quality
 import enum.RequestError
-import model.User
+import model.*
+import storage.MyDBRepository
+import storage.MySQLRepository
+import util.Calculation
 import javax.annotation.processing.Completion
 
 fun main(args: Array<String>) {
@@ -129,6 +132,60 @@ fun main(args: Array<String>) {
         println("All number of list is lower than 10")
     }
 
+    // mutable map
+    var person1 = mutableMapOf<String, Any>(
+        "name" to "Hoang",
+        "age" to 22,
+        "email" to "hoang@gmail.com"
+    )
+    println(person1)
+    person1["name"] = "minh"
+    println(person1)
 
+    // companion object <=> static
+    println("PI = ${Calculation.PI}; 3 * 4 = ${Calculation.multiply(3, 4)}")
 
+    // sealed class
+    // cannot init
+//    val vehicle: Vehicle = Vehicle("bicycle", "red")
+    val bicycle: Bicycle = Bicycle("xe dap", "yellow", 2023)
+    println(bicycle)
+    val car = Car("o to", "red", 300.0f)
+    bicycle.hasBasket(true)
+
+    // filter
+    var numbers = listNumber.filter { it in 1..4 }
+    println(numbers)
+    var sortNumber = numbers.sortedBy { it }
+    // split list
+    var (lowerNumber, higherNumber) = listNumber.partition { it <= 4 }
+    println("$lowerNumber \n $higherNumber")
+    // min max
+    println("${listNumber.minOf { it }} \n ${listNumber.minOf { it }}")
+
+    // interface, delegate
+    val connectionString = "myServer;myDb;myUsername;myPassword"
+    val repository = MySQLRepository(connectionString)
+    println(repository.connectionString)
+    // delegate
+    val myDBRepository = MyDBRepository(connectionString)
+    myDBRepository.connectToDb(connectionString)
+    // delegate property
+    val user2 = User(2, "Linh", "linh@gmail.com")
+    println(user2.age)
+    user2.age = 23
+    println(user2.age)
+    //delegate: lazy, observable
+    println("user information: ${user2.infoUser}")
+    // observable: run when property's value changes
+    var product = Product(mapOf(
+        "name" to "Bicycle",
+        "year" to 2023
+    ))
+    println(product.toString())
+    product.infoProduct = "new value"
+    // vetoable
+    product.limit = 20
+    product.limit = 0 // 0 < 10 -> still old value
+    println(product.limit)
 }
