@@ -161,7 +161,7 @@ fun main(args: Array<String>) {
     var (lowerNumber, higherNumber) = listNumber.partition { it <= 4 }
     println("$lowerNumber \n $higherNumber")
     // min max
-    println("${listNumber.minOf { it }} \n ${listNumber.minOf { it }}")
+    println("${listNumber.minOf { it }} \n ${listNumber.maxOf { it }}")
 
     // interface, delegate
     val connectionString = "myServer;myDb;myUsername;myPassword"
@@ -188,4 +188,29 @@ fun main(args: Array<String>) {
     product.limit = 20
     product.limit = 0 // 0 < 10 -> still old value
     println(product.limit)
+
+    // is operator
+    fun typeObj(obj: Any){
+        when(obj){
+            is String -> println("is String")
+            is Bicycle -> println("is Bicycle")
+            is Product -> println("is Product")
+            is User -> println("is User")
+            else -> println("Unknown")
+        }
+    }
+    typeObj(product)
+    typeObj("This is String")
+
+    // as? operator -> right-hand side is nullable
+    val y = null
+    val t: String? = y as? String
+    println("t = $t")
+
+    // open class
+    val cat = Cat()
+    cat.describe()
+    cat.greed()
+    val animal = Animal("Dog", 2)
+
 }
