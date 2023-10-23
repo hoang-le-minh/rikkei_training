@@ -1,3 +1,4 @@
+import Result
 import enum.Quality
 import enum.RequestError
 import model.*
@@ -212,5 +213,45 @@ fun main(args: Array<String>) {
     cat.describe()
     cat.greed()
     val animal = Animal("Dog", 2)
+    animal.greed()
 
+    // outer, nested class and inner class
+    OuterClass.NestedClass().description()
+    val nestedClass = OuterClass.NestedClass()
+    println("${OuterClass().id} ${nestedClass.id}")
+    OuterClass().InnerClass().description()
+
+
+    // generics
+    val messageResult = Result("messageResult String")
+    val intResult = Result(111)
+    println("${messageResult.value}, ${intResult.value} Int")
+
+
+}
+
+class OuterClass(){
+    private var name = "Outer"
+    var id = 10
+    class NestedClass{
+        private var name = "Nested"
+        var id = 100
+        fun description(){
+            println("name: $name, id: $id")
+        }
+    }
+
+    inner class InnerClass(){
+        fun description(){
+            println("outer class id: $name")
+        }
+    }
+}
+
+interface Node<out T>{
+    fun next(): T
+}
+fun demo(node: Node<String>){
+    val obj: Node<Any> = node
+    println(obj.toString())
 }
