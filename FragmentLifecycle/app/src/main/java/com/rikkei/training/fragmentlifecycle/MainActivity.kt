@@ -24,7 +24,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnFragmentB.setOnClickListener {
-            replaceFragment(FragmentB())
+           val abc =  FragmentB()
+            abc.onChangFragment = object  : OnChangFragment{
+                override fun changeA() {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.frm_layout, FragmentA())
+                    fragmentTransaction.commit()
+                }
+
+            }
+            replaceFragment(abc)
         }
 
 
@@ -32,7 +41,16 @@ class MainActivity : AppCompatActivity() {
             sendDataToFragment(FragmentA())
         }
         binding.btnSendToB.setOnClickListener {
-            sendDataToFragment(FragmentB())
+            val abc =  FragmentB()
+            abc.onChangFragment = object  : OnChangFragment{
+                override fun changeA() {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.frm_layout, FragmentA())
+                    fragmentTransaction.commit()
+                }
+
+            }
+            sendDataToFragment(abc)
         }
 
     }

@@ -57,8 +57,8 @@ class FragmentA : Fragment() {
 
     private fun navToFragmentB(){
 
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentAA, FragmentB())
+        val fragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentA, FragmentB())
         fragmentTransaction.commit()
     }
 

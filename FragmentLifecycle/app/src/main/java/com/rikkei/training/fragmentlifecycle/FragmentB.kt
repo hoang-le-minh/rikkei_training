@@ -16,6 +16,10 @@ class FragmentB : Fragment() {
 
     private lateinit var mainActivity: MainActivity
 
+    var onChangFragment: OnChangFragment? = null
+    set(value) {
+        field = value
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,10 +44,10 @@ class FragmentB : Fragment() {
     }
 
     private fun navToFragmentA() {
-
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentBB, FragmentA())
-        fragmentTransaction.commit()
+        onChangFragment?.changeA()
+//        val fragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.fragmentB, FragmentA())
+//        fragmentTransaction.commit()
     }
 
     private fun sendDataToActivity() {
@@ -51,5 +55,8 @@ class FragmentB : Fragment() {
         mainActivity.getEdtEmail().setText(email)
     }
 
+}
 
+interface OnChangFragment{
+    fun changeA()
 }
