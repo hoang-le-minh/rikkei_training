@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import com.rikkei.training.fragmentlifecycle.databinding.FragmentBBinding
 
 private lateinit var binding: FragmentBBinding
@@ -28,12 +32,24 @@ class FragmentB : Fragment() {
             sendDataToActivity()
         }
 
+        binding.btnNavToA.setOnClickListener {
+            navToFragmentA()
+        }
+
         return view
+    }
+
+    private fun navToFragmentA() {
+
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentBB, FragmentA())
+        fragmentTransaction.commit()
     }
 
     private fun sendDataToActivity() {
         val email = binding.edtEmailB.text.toString()
         mainActivity.getEdtEmail().setText(email)
     }
+
 
 }

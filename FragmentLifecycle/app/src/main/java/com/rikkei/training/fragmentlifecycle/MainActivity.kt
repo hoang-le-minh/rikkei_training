@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.rikkei.training.fragmentlifecycle.databinding.ActivityMainBinding
 
 private lateinit var binding: ActivityMainBinding
@@ -13,6 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.frm_layout2, FragmentC())
+        fragmentTransaction.commit()
 
         binding.btnFragmentA.setOnClickListener {
             replaceFragment(FragmentA())
@@ -68,5 +73,6 @@ class MainActivity : AppCompatActivity() {
     fun getEdtEmail(): EditText{
         return binding.edtEmail
     }
+
 
 }
