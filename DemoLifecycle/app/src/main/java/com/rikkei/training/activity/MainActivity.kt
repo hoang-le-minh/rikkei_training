@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import com.rikkei.training.activity.databinding.ActivityMainBinding
 
-private lateinit var binding: ActivityMainBinding
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     private var mediaPlayer: MediaPlayer? = null
 

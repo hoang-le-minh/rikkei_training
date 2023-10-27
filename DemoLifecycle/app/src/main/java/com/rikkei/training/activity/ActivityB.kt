@@ -9,8 +9,8 @@ import android.os.PersistableBundle
 import android.util.Log
 import com.rikkei.training.activity.databinding.ActivityBBinding
 
-private lateinit var binding: ActivityBBinding
 class ActivityB : AppCompatActivity() {
+    private lateinit var binding: ActivityBBinding
 
     var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {

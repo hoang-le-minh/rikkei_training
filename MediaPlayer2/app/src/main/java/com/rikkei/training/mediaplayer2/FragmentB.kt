@@ -1,67 +1,35 @@
-package com.rikkei.training.fragmentlifecycle
+package com.rikkei.training.mediaplayer2
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.rikkei.training.fragmentlifecycle.databinding.FragmentABinding
+import com.rikkei.training.mediaplayer2.databinding.FragmentBBinding
 
-class FragmentA : Fragment() {
-    private lateinit var binding: FragmentABinding
 
-    private lateinit var mainActivity: MainActivity
+class FragmentB : Fragment() {
+    private lateinit var binding: FragmentBBinding
+    private lateinit var mediaPlayer: MediaPlayer
 
-    // initialize view component and add it to the activity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentABinding.inflate(inflater, container, false)
+        binding = FragmentBBinding.inflate(layoutInflater, container, false)
         val view = binding.root
 
-        mainActivity = activity as MainActivity
-
-        binding.edtEmailA.setText(arguments?.getString("emailA"))
-
-        binding.btnUpdateA.setOnClickListener {
-            sendDataToActivity()
-        }
-
-        binding.btnNavToB.setOnClickListener {
-            navToFragmentB()
-        }
-
-        binding.btnSendToC.setOnClickListener {
-            sendDataToC()
+        binding.btnBackToA.setOnClickListener {
+            view.findNavController().navigate(R.id.action_fragmentB_to_fragmentA)
         }
 
         return view
-    }
-
-    private fun sendDataToC() {
-        val email = binding.edtEmailA.text.toString()
-        val fragmentC = mainActivity.supportFragmentManager.findFragmentById(R.id.frm_layout2) as? FragmentC
-        fragmentC?.receiverData(email)
-    }
-
-    private fun sendDataToActivity() {
-        val email = binding.edtEmailA.text.toString()
-        mainActivity.getEdtEmail().setText(email)
-    }
-
-    private fun navToFragmentB(){
-
-        val fragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentA, FragmentB())
-        fragmentTransaction.commit()
     }
 
     // fragment is attached to the host activity
@@ -88,42 +56,43 @@ class FragmentA : Fragment() {
     // fragment is displayed
     override fun onStart() {
         super.onStart()
-        Log.d("lifecycle", "Fragment A: onStart")
+        Log.d("lifecycle", "Fragment B: onStart")
     }
 
     // Fragment is visible and interactive
     override fun onResume() {
         super.onResume()
-        Log.d("lifecycle", "Fragment A: onResume")
+        Log.d("lifecycle", "Fragment B: onResume")
     }
 
     // can't interacted with, fragment is about to be replaced, deleted or activity on pause
     override fun onPause() {
         super.onPause()
-        Log.d("lifecycle", "Fragment A: onPause")
+        Log.d("lifecycle", "Fragment B: onPause")
     }
 
     // don't displayed, replaced, deleted or activity on stop
     override fun onStop() {
         super.onStop()
-        Log.d("lifecycle", "Fragment A: onStop")
+        Log.d("lifecycle", "Fragment B: onStop")
     }
 
     // view and resource created in onCreateView are removed from activity
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("lifecycle", "Fragment A: onDestroyView")
+        Log.d("lifecycle", "Fragment B: onDestroyView")
     }
 
     // destroy fragment
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("lifecycle", "Fragment A: onDestroy")
+        Log.d("lifecycle", "Fragment B: onDestroy")
     }
 
     // detach fragment from activity
     override fun onDetach() {
         super.onDetach()
-        Log.d("lifecycle", "Fragment A: onDetach")
+        Log.d("lifecycle", "Fragment B: onDetach")
     }
+
 }
