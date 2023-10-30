@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_fragmentA_to_fragmentB"
             app:destination="@id/fragmentB" />
+        <argument
+            android:name="pauseA"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/fragmentB"
@@ -22,5 +26,9 @@
         <action
             android:id="@+id/action_fragmentB_to_fragmentA"
             app:destination="@id/fragmentA" />
+        <argument
+            android:name="pauseA"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

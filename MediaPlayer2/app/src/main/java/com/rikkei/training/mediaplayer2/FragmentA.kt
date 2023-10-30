@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.NavArgs
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.rikkei.training.mediaplayer2.databinding.FragmentABinding
 
 class FragmentA : Fragment() {
@@ -23,11 +27,36 @@ class FragmentA : Fragment() {
         Log.d("lifecycle", "Fragment A: onCreateView")
         binding = FragmentABinding.inflate(layoutInflater, container, false)
         val view = binding.root
+        KhoiTaoMediaPlayer()
+
+        if(savedInstanceState != null){
+            mediaPlayer.release()
+            KhoiTaoMediaPlayer()
+        }
+        mediaPlayer.start()
+
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Int>("pauseA")?.observe(viewLifecycleOwner){
+            mediaPlayer.seekTo(it)
+            mediaPlayer.start()
+        }
+
         binding.btnNavToB.setOnClickListener {
-            view.findNavController().navigate(R.id.action_fragmentA_to_fragmentB)
+            val action = FragmentADirections.actionFragmentAToFragmentB(mediaPlayer.currentPosition)
+            view.findNavController().navigate(action)
+            Log.d("lifecycle", "Fragment A -> Fragment B")
         }
 
         return view
+    }
+
+
+    private fun KhoiTaoMediaPlayer(){
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.di_du_dua_di)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("pauseA", 0)
     }
 
     // fragment is attached to the host activity
@@ -73,6 +102,7 @@ class FragmentA : Fragment() {
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "Fragment A: onStop")
+        mediaPlayer.stop()
     }
 
     // view and resource created in onCreateView are removed from activity
@@ -85,6 +115,8 @@ class FragmentA : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("lifecycle", "Fragment A: onDestroy")
+        findNavController().currentBackStackEntry?.savedStateHandle?.remove<Int>("pauseA")
+
     }
 
     // detach fragment from activity
