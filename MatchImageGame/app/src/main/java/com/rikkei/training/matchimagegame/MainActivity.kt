@@ -1,11 +1,11 @@
-package com.rikkei.training.viewgroup
+package com.rikkei.training.matchimagegame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class FrameLayout : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_frame_layout)
+        setContentView(R.layout.activity_main)
     }
 }
