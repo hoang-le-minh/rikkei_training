@@ -1,6 +1,7 @@
 package com.rikkei.training.fragmentlifecycle
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class FragmentB : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("lifecycle", "Fragment B: onCreateView")
         // Inflate the layout for this fragment
         binding = FragmentBBinding.inflate(inflater, container, false)
         val view = binding.root

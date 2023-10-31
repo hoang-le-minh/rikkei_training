@@ -23,6 +23,8 @@ class FragmentA : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("lifecycle", "Fragment A: onCreateView")
+
         // Inflate the layout for this fragment
         binding = FragmentABinding.inflate(inflater, container, false)
         val view = binding.root
@@ -58,9 +60,9 @@ class FragmentA : Fragment() {
     }
 
     private fun navToFragmentB(){
-
+        Log.d("lifecycle", "Fragment A -> Fragment B")
         val fragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentA, FragmentB())
+        fragmentTransaction.replace(R.id.frm_layout, FragmentB())
         fragmentTransaction.commit()
     }
 
