@@ -38,6 +38,11 @@ android {
 }
 
 dependencies {
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // Security Crypto
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
