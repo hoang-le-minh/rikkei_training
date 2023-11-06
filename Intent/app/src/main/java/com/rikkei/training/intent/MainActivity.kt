@@ -1,18 +1,28 @@
 package com.rikkei.training.intent
 
+import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.MediaController
 import android.widget.Toast
+import androidx.activity.viewModels
+import coil.compose.AsyncImage
 import com.rikkei.training.intent.databinding.ActivityMainBinding
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel by viewModels<MediaViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +41,50 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val mediaController = MediaController(this)
+        mediaController.setAnchorView(binding.videoView)
+        binding.videoView.setMediaController(mediaController)
+
         binding.videoView.setVideoPath("https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4")
+        binding.videoView.requestFocus()
         binding.videoView.start()
 
+    }
 
+    private fun handleSendImage(intent: Intent) {
+        (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri)?.let {
+            // Update UI to reflect image being shared
+            binding.imageView.setImageURI(null)
+            binding.imageView.setImageURI(it)
+        }
+    }
+
+    private fun handleSendVideo(intent: Intent) {
+        (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri)?.let {
+            // Update UI to reflect video being shared
+            binding.videoView.setVideoURI(it)
+            binding.videoView.requestFocus()
+            binding.videoView.start()
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
-        } else {
-            intent?.getParcelableExtra(Intent.EXTRA_STREAM)
+        when {
+            intent?.action == Intent.ACTION_SEND -> {
+                if (intent.type?.startsWith("video/") == true) {
+                    handleSendVideo(intent) // Handle text being sent
+                } else if (intent.type?.startsWith("image/") == true) {
+                    handleSendImage(intent) // Handle single image being sent
+                }
+            }
 
+            else -> {
+                binding.videoView.setVideoPath("https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4")
+                binding.videoView.requestFocus()
+                binding.videoView.start()
+            }
         }
     }
+
 }
