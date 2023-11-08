@@ -14,6 +14,7 @@ import android.util.Log
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.ContentInfoCompat.Flags
 import coil.compose.AsyncImage
 import com.rikkei.training.intent.databinding.ActivityMainBinding
 import java.io.IOException
@@ -21,6 +22,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val NAV_CODE = 1
 
     private val viewModel by viewModels<MediaViewModel>()
 
@@ -48,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         binding.videoView.setVideoPath("https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4")
         binding.videoView.requestFocus()
         binding.videoView.start()
+
+        binding.btnNavB.setOnClickListener {
+            val iB = Intent(this, ActivityB::class.java)
+            startActivityForResult(iB, NAV_CODE)
+        }
 
     }
 
@@ -87,4 +94,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == NAV_CODE && resultCode == RESULT_OK){
+            if (data != null) {
+                binding.txtResult.text = data.extras?.getString("result") ?: "Name"
+            }
+        }
+    }
 }
