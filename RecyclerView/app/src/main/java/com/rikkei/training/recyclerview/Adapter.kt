@@ -12,12 +12,14 @@ import com.bumptech.glide.Glide
 import kotlin.coroutines.coroutineContext
 
 class Adapter: RecyclerView.Adapter<Adapter.MyViewHolder>() {
-    private var listHero = emptyList<Hero>()
+    private var listUser = emptyList<User>()
     private lateinit var context: Context
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val imageHero = itemView.findViewById<ImageView>(R.id.image_hero)
-        val txtName = itemView.findViewById<TextView>(R.id.text_name)
+        val txtName: TextView = itemView.findViewById(R.id.txt_name)
+        val txtAge: TextView = itemView.findViewById(R.id.txt_age)
+        val txtEmail: TextView = itemView.findViewById(R.id.txt_email)
+
     }
 
 
@@ -26,22 +28,22 @@ class Adapter: RecyclerView.Adapter<Adapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentHero = listHero[position]
-        holder.txtName.text = currentHero.name
-
-        Glide.with(context)
-            .load(currentHero.image)
-            .into(holder.imageHero)
+        val currentUser = listUser[position]
+        val ageString = "(${currentUser.age})"
+        holder.txtName.text = currentUser.name
+        holder.txtAge.text = ageString
+        holder.txtEmail.text = currentUser.email
 
     }
 
     override fun getItemCount(): Int {
-        return listHero.size
+        return listUser.size
     }
 
-    fun setData(context: Context, listHero: MutableList<Hero>){
-        this.listHero = listHero
+    fun setData(context: Context, listUser: MutableList<User>){
+        this.listUser = listUser
         this.context = context
+        notifyDataSetChanged()
     }
 
 
