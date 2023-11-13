@@ -23,5 +23,10 @@ class ActivityC : AppCompatActivity() {
             finish()
         }
 
+        binding.btnNav1.setOnClickListener {
+            val i1 = Intent(this, Activity1::class.java)
+            startActivity(i1)
+        }
+
     }
 }
