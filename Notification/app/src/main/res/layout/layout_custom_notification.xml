@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:padding="10dp"
+    android:background="@color/teal_200">
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_small_notification"
+        android:layout_centerVertical="true" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@+id/img_icon"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/txt_time_custom_notification"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:id="@+id/txt_title_custom_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            style="@style/TextAppearance.Compat.Notification.Title"/>
+
+        <TextView
+            android:id="@+id/txt_message_custom_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="message"
+            style="@style/TextAppearance.Compat.Notification.Info"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_time_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        style="@style/TextAppearance.Compat.Notification.Time"/>
+
+</RelativeLayout>
