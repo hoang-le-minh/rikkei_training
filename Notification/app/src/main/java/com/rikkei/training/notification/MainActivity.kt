@@ -46,6 +46,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendCustomNotification() {
 
+        // start special activity from notification
+        val notifyIntent = Intent(this, SpecialActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val notifyPendingIntent = PendingIntent.getActivity(
+            this, NOTIFICATION_ID, notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         // collapsed
         val remoteViews = RemoteViews(packageName, R.layout.layout_custom_notification)
         remoteViews.setTextViewText(R.id.txt_title_custom_notification, "Title custom notification $NOTIFICATION_ID")
@@ -67,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             .setSmallIcon(R.drawable.ic_small_notification)
             .setCustomContentView(remoteViews)
             .setCustomBigContentView(remoteViewsExpanded)
+            .setContentIntent(notifyPendingIntent)
             .build()
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
