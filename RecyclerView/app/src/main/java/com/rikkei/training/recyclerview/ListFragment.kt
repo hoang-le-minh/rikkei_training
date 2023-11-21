@@ -64,7 +64,7 @@ class ListFragment : Fragment() {
         recyclerView.itemAnimator = SlideInUpAnimator()
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment2)
+            findNavController().navigate(R.id.action_listFragment_to_userListFragment2)
         }
 
         return view

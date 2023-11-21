@@ -10,8 +10,8 @@
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
-            android:id="@+id/action_addFragment2_to_listFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_addFragment2_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
@@ -19,7 +19,16 @@
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_addFragment2"
+            android:id="@+id/action_listFragment_to_userListFragment2"
+            app:destination="@id/userListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.rikkei.training.recyclerview.UserListFragment"
+        android:label="fragment_user_list"
+        tools:layout="@layout/fragment_user_list" >
+        <action
+            android:id="@+id/action_userListFragment_to_addFragment2"
             app:destination="@id/addFragment2" />
     </fragment>
 </navigation>

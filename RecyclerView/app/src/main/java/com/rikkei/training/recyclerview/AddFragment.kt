@@ -13,6 +13,7 @@ import com.rikkei.training.recyclerview.databinding.FragmentAddBinding
 class AddFragment : Fragment() {
 
     private lateinit var testViewModel: TestViewModel
+    private lateinit var data: Data
 
     private lateinit var binding: FragmentAddBinding
     override fun onCreateView(
@@ -25,16 +26,34 @@ class AddFragment : Fragment() {
         val mainActivity  = activity as MainActivity
 
         testViewModel = ViewModelProvider(mainActivity)[TestViewModel::class.java]
+        data = ViewModelProvider(mainActivity)[Data::class.java]
         testViewModel.clickCount.observe(viewLifecycleOwner){
             binding.textCount.text = it.toString()
         }
 
         binding.btnAdd.setOnClickListener {
-
+            addUser()
             findNavController().popBackStack()
         }
 
         return view
+    }
+
+    private fun addUser(){
+        var name = binding.edtAddName.text.toString()
+        var age = binding.edtAddAge.text.toString()
+        val email = binding.edtAddEmail.text.toString()
+
+        if(name.trim() == ""){
+            name = "Unknown"
+        }
+        if(age == ""){
+            age = "0"
+        }
+
+        val user = User(name, age.toInt(), email)
+        data.addUser(user)
+
     }
 
 
