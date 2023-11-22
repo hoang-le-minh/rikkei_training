@@ -1,5 +1,6 @@
 package com.rikkei.training.service
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
@@ -9,10 +10,12 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.rikkei.training.service.MyApplication.Companion.CHANNEL_ID
 
 class MyService: Service() {
     companion object {
@@ -48,7 +51,7 @@ class MyService: Service() {
         if(song != null){
             mSong = song
             startMusic(song)
-            sendDataNotification(song)
+            sendNotificationMedia(song)
         }
 
 
@@ -67,33 +70,71 @@ class MyService: Service() {
         sendActionToActivity(ACTION_START)
     }
 
-    private fun sendDataNotification(song: Song?) {
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//    private fun sendDataNotification(song: Song?) {
+//        val intent = Intent(this, MainActivity::class.java)
+//        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//        val bitmap = song?.image?.let { BitmapFactory.decodeResource(resources, it) }
+//
+//        val remoteViews = RemoteViews(packageName, R.layout.custom_notification)
+//        remoteViews.setTextViewText(R.id.txt_title_song, song?.title)
+//        remoteViews.setTextViewText(R.id.txt_single_song, song?.single)
+//        remoteViews.setImageViewBitmap(R.id.img_icon, bitmap)
+//        remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.play_circle)
+//
+//        if(isPlaying){
+//            remoteViews.setOnClickPendingIntent(R.id.img_play_or_pause, getPendingIntent(this, ACTION_PAUSE))
+//            remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.pause_circle)
+//        } else {
+//            remoteViews.setOnClickPendingIntent(R.id.img_play_or_pause, getPendingIntent(this, ACTION_RESUME))
+//            remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.play_circle)
+//        }
+//        remoteViews.setOnClickPendingIntent(R.id.img_clear, getPendingIntent(this, ACTION_CLEAR))
+//
+//        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setSmallIcon(R.drawable.ic_service)
+//            .setContentIntent(pendingIntent)
+//            .setCustomContentView(remoteViews)
+//            .setSound(null)
+//            .build()
+//
+//        startForeground(1, notification)
+//    }
 
-        val bitmap = song?.image?.let { BitmapFactory.decodeResource(resources, it) }
+    private fun sendNotificationMedia(song: Song?){
 
-        val remoteViews = RemoteViews(packageName, R.layout.custom_notification)
-        remoteViews.setTextViewText(R.id.txt_title_song, song?.title)
-        remoteViews.setTextViewText(R.id.txt_single_song, song?.single)
-        remoteViews.setImageViewBitmap(R.id.img_icon, bitmap)
-        remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.play_circle)
+        val mediaSession = MediaSessionCompat(this, "SESSION_TAG")
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.motculua)
+
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSmallIcon(R.drawable.ic_music_note)
+
+            // Apply the media style template.
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                .setShowActionsInCompactView(0, 1, 2)
+//                .setMediaSession(mediaSession.sessionToken)
+            )
+            .setContentTitle(song?.title)
+            .setSubText("Album Name")
+            .setContentText(song?.single)
+            .setLargeIcon(bitmap)
 
         if(isPlaying){
-            remoteViews.setOnClickPendingIntent(R.id.img_play_or_pause, getPendingIntent(this, ACTION_PAUSE))
-            remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.pause_circle)
+            notificationBuilder
+                // Add media control buttons that invoke intents in your media service
+                .addAction(R.drawable.ic_skip_prev, "Previous", null) // #0
+                .addAction(R.drawable.pause_circle, "Pause", getPendingIntent(this, ACTION_PAUSE)) // #1
+                .addAction(R.drawable.ic_skip_next, "Next", null) // #2
         } else {
-            remoteViews.setOnClickPendingIntent(R.id.img_play_or_pause, getPendingIntent(this, ACTION_RESUME))
-            remoteViews.setImageViewResource(R.id.img_play_or_pause, R.drawable.play_circle)
+            notificationBuilder
+                // Add media control buttons that invoke intents in your media service
+                .addAction(R.drawable.ic_skip_prev, "Previous", null) // #0
+                .addAction(R.drawable.play_circle, "Play", getPendingIntent(this, ACTION_RESUME)) // #1
+                .addAction(R.drawable.ic_skip_next, "Next", null) // #2
         }
-        remoteViews.setOnClickPendingIntent(R.id.img_clear, getPendingIntent(this, ACTION_CLEAR))
 
-        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_service)
-            .setContentIntent(pendingIntent)
-            .setCustomContentView(remoteViews)
-            .setSound(null)
-            .build()
+        val notification = notificationBuilder.build()
 
         startForeground(1, notification)
     }
@@ -123,7 +164,7 @@ class MyService: Service() {
             isPlaying = true
             Log.d("songInfo", mSong.toString())
             sendActionToActivity(ACTION_RESUME)
-            sendDataNotification(mSong)
+            sendNotificationMedia(mSong)
         }
     }
 
@@ -133,7 +174,7 @@ class MyService: Service() {
             isPlaying = false
             Log.d("songInfo", mSong.toString())
             sendActionToActivity(ACTION_PAUSE)
-            sendDataNotification(mSong)
+            sendNotificationMedia(mSong)
         }
     }
 

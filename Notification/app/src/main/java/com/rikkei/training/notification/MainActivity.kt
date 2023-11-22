@@ -4,15 +4,15 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.AudioAttributes
-import android.media.RingtoneManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.media.session.MediaSessionCompat
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.rikkei.training.notification.MyApplication.Companion.CHANNEL_ID1
 import com.rikkei.training.notification.MyApplication.Companion.CHANNEL_ID2
+import com.rikkei.training.notification.MyApplication.Companion.CHANNEL_ID3
 import com.rikkei.training.notification.MyApplication.Companion.NOTIFICATION_ID
 import com.rikkei.training.notification.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
@@ -41,7 +41,40 @@ class MainActivity : AppCompatActivity() {
             startActivity(iListUser)
         }
 
+        binding.btnSendMedia.setOnClickListener {
+            sendNotificationMedia()
+        }
+
         supportActionBar?.title = "MainActivity"
+    }
+
+    private fun sendNotificationMedia(){
+
+        val mediaSession = MediaSessionCompat(this, "tag")
+        mediaSession.isActive = true
+
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.motculua)
+
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID3)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSmallIcon(R.drawable.ic_music_note)
+            // Add media control buttons that invoke intents in your media service
+            .addAction(R.drawable.ic_skip_prev, "Previous", null) // #0
+            .addAction(R.drawable.pause_circle, "Pause", null) // #1
+            .addAction(R.drawable.ic_skip_next, "Next", null) // #2
+            // Apply the media style template.
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                .setShowActionsInCompactView(0, 1, 2)
+                .setMediaSession(mediaSession.sessionToken))
+            .setContentTitle("Title")
+            .setSubText("Album Name")
+            .setContentText("Single")
+            .setLargeIcon(bitmap)
+            .build()
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+
+        notificationManager?.notify(incrementNotificationId(), notification)
     }
 
     private fun sendCustomNotification() {

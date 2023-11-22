@@ -32,5 +32,9 @@ class Data: ViewModel() {
         _listUser.value?.add(user)
     }
 
+    fun deleteUser(position: Int){
+        _listUser.value?.removeAt(position)
+    }
+
 
 }

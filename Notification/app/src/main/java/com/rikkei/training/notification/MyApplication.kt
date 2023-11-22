@@ -11,6 +11,7 @@ class MyApplication: Application() {
     companion object {
         val CHANNEL_ID1 = "demo_notification1"
         val CHANNEL_ID2 = "demo_notification2"
+        val CHANNEL_ID3 = "demo_notification3"
         var NOTIFICATION_ID = 1
     }
 
@@ -34,9 +35,11 @@ class MyApplication: Application() {
 
 
         val channel2 = NotificationChannel(CHANNEL_ID2, "Channel Notification", NotificationManager.IMPORTANCE_HIGH)
+        val channel3 = NotificationChannel(CHANNEL_ID3, "Channel Notification", NotificationManager.IMPORTANCE_DEFAULT)
         manager?.let{
             it.createNotificationChannel(channel)
             it.createNotificationChannel(channel2)
+            it.createNotificationChannel(channel3)
         }
     }
 

@@ -33,11 +33,18 @@ class UserListFragment : Fragment() {
         val recyclerView = binding.recyclerView2
 //        createData()
         data.listUser.observe(viewLifecycleOwner) {
+            listAdapter.setOnItemClickListener(object : UserListAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    Log.d("itemClickName", "onItemClick: $position")
+                    it.removeAt(position)
+                    listAdapter.notifyItemRemoved(position)
+                }
+
+            })
             listAdapter.submitList(it)
         }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = listAdapter
-
 
         return view
     }
