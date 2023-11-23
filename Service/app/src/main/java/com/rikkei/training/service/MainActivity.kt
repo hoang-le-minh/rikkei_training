@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.rikkei.training.service.boundservice.BoundActivity
 import com.rikkei.training.service.databinding.ActivityMainBinding
 
 
@@ -101,6 +102,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnStop.setOnClickListener {
             clickStopService()
+        }
+
+        binding.btnNavToBoundService.setOnClickListener {
+            val intent = Intent(this, BoundActivity::class.java)
+            startActivity(intent)
         }
     }
 

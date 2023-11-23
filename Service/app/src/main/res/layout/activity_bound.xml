@@ -4,56 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:background="@color/teal_200"
+    tools:context=".boundservice.BoundActivity">
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn_start_bound_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Service"
+        android:text = "Start Bound Service"
+        android:textSize="20sp"
+        android:backgroundTint="@color/teal_700"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#009688"/>
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Service"
-        app:layout_constraintTop_toBottomOf="@+id/btn_start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#B80606"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
-        android:id="@+id/btn_nav_to_bound_service"
+        android:id="@+id/btn_stop_bound_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Bound Service"
-        app:layout_constraintTop_toBottomOf="@+id/btn_stop"
+        android:text = "Stop Service"
+        android:textSize="20sp"
+        android:backgroundTint="@color/purple_200"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#673AB7"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_bound_service"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btn_start_bound_service_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Start Bound Service 2"
+        android:textSize="20sp"
+        android:backgroundTint="@color/purple_500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_stop_bound_service_2"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btn_stop_bound_service_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Stop Bound Service 2"
+        android:textSize="20sp"
+        android:backgroundTint="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"/>
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/purple_200">
+        android:background="@color/teal_700">
 
         <ImageView
             android:id="@+id/img_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@mipmap/ic_launcher"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"/>
@@ -104,6 +122,7 @@
             android:layout_centerVertical="true" />
 
     </RelativeLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

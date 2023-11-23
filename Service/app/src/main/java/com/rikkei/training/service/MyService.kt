@@ -6,10 +6,12 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.media.MediaMetadata
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import android.widget.RemoteViews
@@ -102,9 +104,16 @@ class MyService: Service() {
 //    }
 
     private fun sendNotificationMedia(song: Song?){
-
-        val mediaSession = MediaSessionCompat(this, "SESSION_TAG")
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.motculua)
+        val mediaSession = MediaSessionCompat(this, "SESSION_TAG")
+        mediaSession.isActive = true
+        mediaSession.setMetadata(
+            MediaMetadataCompat.Builder()
+                .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, bitmap)
+                .putString(MediaMetadata.METADATA_KEY_TITLE, song?.title)
+                .putString(MediaMetadata.METADATA_KEY_ARTIST, song?.single)
+                .build()
+        )
 
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
