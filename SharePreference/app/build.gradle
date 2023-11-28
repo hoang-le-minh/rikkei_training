@@ -33,6 +33,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -54,9 +55,5 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
     androidTestImplementation "androidx.room:room-testing:2.2.5"
-
-    // Android Debug Database
-//    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
-
 
 }

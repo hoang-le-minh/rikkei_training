@@ -19,6 +19,9 @@ class ListActivity : AppCompatActivity() {
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val myViewModel = MyViewModel("Minh Hoang")
+        binding.myViewModel = myViewModel
+
         val username = getEncryptedSharedPreferences().getString("username", "")
         binding.txtEmail.text = username
     }
