@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SharePreference</string>
+    <string name="pref_login_key">PREF_LOGIN</string>
+</resources>

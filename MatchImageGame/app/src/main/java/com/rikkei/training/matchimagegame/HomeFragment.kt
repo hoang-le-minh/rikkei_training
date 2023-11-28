@@ -27,7 +27,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         val view = binding.root
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnPlay.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_playFragment)
         }
@@ -40,9 +44,6 @@ class HomeFragment : Fragment() {
         val listScore = getListScore()
         adapter.setData(listScore)
         recyclerView.adapter = adapter
-
-
-        return view
     }
 
     private fun getEncryptedSharedPreferences(): SharedPreferences {

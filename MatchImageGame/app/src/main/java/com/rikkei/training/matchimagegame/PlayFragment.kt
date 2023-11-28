@@ -74,7 +74,9 @@ class PlayFragment : Fragment() {
                     val img1Bitmap = img1Drawable.bitmap
                     val img2Drawable = arrClick[1].drawable as BitmapDrawable
                     val img2Bitmap = img2Drawable.bitmap
-
+//                    val hand = Handler()
+//                    val run = Runnable {  }
+//                    hand.removeCallbacks(run)
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         if(img1Bitmap == img2Bitmap){

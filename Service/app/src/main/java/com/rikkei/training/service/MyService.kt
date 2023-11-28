@@ -25,7 +25,6 @@ class MyService: Service() {
         const val ACTION_RESUME = 2
         const val ACTION_CLEAR = 3
         const val ACTION_START = 4
-
     }
 
     private var mediaPlayer: MediaPlayer? = null
