@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.rikkei.training.sharepreference.databinding.ActivityListBinding
@@ -13,6 +14,7 @@ import com.rikkei.training.sharepreference.databinding.ActivityListBinding
 class ListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityListBinding
+    private val listAdapter = UserListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,24 @@ class ListActivity : AppCompatActivity() {
 
         val username = getEncryptedSharedPreferences().getString("username", "")
         binding.txtEmail.text = username
+
+        val recyclerView = binding.recyclerView
+        val layoutManager = LinearLayoutManager(this)
+        listAdapter.submitList(setData())
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = listAdapter
+    }
+
+    private fun setData(): MutableList<User>{
+        return mutableListOf(
+            User("Hoang1", 21),
+            User("Hoang2", 22),
+            User("Hoang3", 23),
+            User("Hoang4", 24),
+            User("Hoang5", 25),
+            User("Hoang6", 26),
+            User("Hoang7", 27)
+        )
     }
 
     /* ====================== menu logout ================================== */
