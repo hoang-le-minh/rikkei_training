@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity2viewmodel"
+            type="com.rikkei.training.sharepreference.Activity2ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".Activity2">
+
+        <TextView
+            android:id="@+id/txt_old_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/edt_content" />
+
+        <TextView
+            android:id="@+id/old_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@{activity2viewmodel.content}"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/txt_old_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_old_content"
+            android:layout_marginStart="10dp" />
+
+
+        <EditText
+            android:id="@+id/edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/content"
+            android:text="@={activity2viewmodel.content}"
+            android:textSize="20sp"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btn_change_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_value"
+            android:onClick="@{() -> activity2viewmodel.changeValueContent()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_content"
+            android:layout_marginTop="10dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

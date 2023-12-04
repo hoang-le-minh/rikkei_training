@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SharePreference</string>
     <string name="pref_login_key">PREF_LOGIN</string>
+    <string name="change_value">Change Value</string>
+    <string name="content">content</string>
+    <string name="old_content">Old Content</string>
 </resources>

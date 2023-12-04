@@ -32,6 +32,11 @@ class ListActivity : AppCompatActivity() {
         listAdapter.submitList(setData())
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = listAdapter
+
+        binding.btnNavToActivity2.setOnClickListener {
+            val intent = Intent(this, Activity2::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setData(): MutableList<User>{
