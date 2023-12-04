@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="activity2viewmodel"
             type="com.rikkei.training.sharepreference.Activity2ViewModel" />
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             tools:text="@{activity2viewmodel.content}"
             android:textSize="20sp"
+            android:visibility="@{cbHide.checked ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/txt_old_content"
             app:layout_constraintTop_toTopOf="@+id/txt_old_content"
             android:layout_marginStart="10dp" />
@@ -49,6 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.4"
             android:autofillHints="" />
 
         <Button
@@ -61,6 +64,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_content"
             android:layout_marginTop="10dp" />
+
+        <CheckBox
+            android:id="@+id/cb_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hide Content"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/txt_old_content"
+            app:layout_constraintTop_toBottomOf="@+id/txt_old_content"
+            android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_change_value"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:imageUrl="@{activity2viewmodel.imageUrl}"
+            app:error="@{@drawable/no_image}"
+            android:scaleType="centerCrop" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
