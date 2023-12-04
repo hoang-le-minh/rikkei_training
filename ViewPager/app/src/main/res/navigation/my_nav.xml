@@ -20,5 +20,16 @@
         android:id="@+id/viewPagerFragment"
         android:name="com.rikkei.training.viewpager.ViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_activity2"
+            app:destination="@id/activity2"
+            app:popUpTo="@id/viewPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/activity2"
+        android:name="com.rikkei.training.viewpager.Activity2"
+        android:label="activity_2"
+        tools:layout="@layout/activity_2" />
 </navigation>

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Pager"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="#fff"
         app:layout_constraintTop_toTopOf="parent"

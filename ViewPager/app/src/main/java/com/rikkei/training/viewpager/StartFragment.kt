@@ -25,7 +25,7 @@ class StartFragment : Fragment() {
         val view = binding.root
 
         Handler(Looper.getMainLooper()).postDelayed({
-            view.findNavController().navigate(R.id.action_startFragment_to_viewPagerFragment)
+            findNavController().navigate(R.id.action_startFragment_to_viewPagerFragment)
         }, 2000)
 
         return view
