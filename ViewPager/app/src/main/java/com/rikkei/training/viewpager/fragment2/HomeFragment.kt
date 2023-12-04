@@ -35,6 +35,10 @@ class HomeFragment : Fragment() {
         binding.btnSecond.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_secondFragment)
         }
+
+        binding.btnOpenBottomDialogFragment.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment2_to_bottomSheetDialogFragment)
+        }
     }
 
 
