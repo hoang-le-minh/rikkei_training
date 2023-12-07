@@ -1,14 +1,16 @@
 package com.rikkei.training.workmanager
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
+import com.rikkei.training.workmanager.coroutinework.ImageCompressWorker
 import com.rikkei.training.workmanager.work.CalcWorker
 import com.rikkei.training.workmanager.work.SumWorker
 
-class CalcViewModel(application: Application): ViewModel() {
+class ResultViewModel(application: Application): ViewModel() {
 
     internal var result: Int = 0
     private val workManager = WorkManager.getInstance(application)
@@ -37,11 +39,12 @@ class CalcViewModel(application: Application): ViewModel() {
         workManager.cancelUniqueWork(SUMMATION_WORK_NAME)
     }
 
-    class CalcViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
+
+    class ResultViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(CalcViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(ResultViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return CalcViewModel(application) as T
+                return ResultViewModel(application) as T
             }
 
             throw IllegalArgumentException("Unable construct viewModel")

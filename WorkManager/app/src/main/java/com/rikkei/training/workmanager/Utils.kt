@@ -9,18 +9,16 @@ import androidx.core.app.NotificationManagerCompat
 
 fun makeStatusNotification(message: String, context: Context) {
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val name = VERBOSE_NOTIFICATION_CHANNEL_NAME
-        val description = VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(CHANNEL_ID, name, importance)
-        channel.description = description
+    val name = VERBOSE_NOTIFICATION_CHANNEL_NAME
+    val description = VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
+    val importance = NotificationManager.IMPORTANCE_HIGH
+    val channel = NotificationChannel(CHANNEL_ID, name, importance)
+    channel.description = description
 
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
+    val notificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
 
-        notificationManager?.createNotificationChannel(channel)
-    }
+    notificationManager?.createNotificationChannel(channel)
 
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_launcher_foreground)

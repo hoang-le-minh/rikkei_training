@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="90dp"
         android:text="Number a"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,5 +90,63 @@
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/btn_handling"
         app:layout_constraintTop_toTopOf="@+id/btn_handling" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compress Image:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/compress_image"
+        app:layout_constraintBottom_toTopOf="@+id/compress_image"
+        app:layout_constraintEnd_toEndOf="@+id/compress_image"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/compress_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="1:1"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_handling"
+        app:layout_constraintEnd_toStartOf="@+id/uncompress_image"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uncompress Image:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/uncompress_image"
+        app:layout_constraintBottom_toTopOf="@+id/uncompress_image"
+        app:layout_constraintEnd_toEndOf="@+id/uncompress_image"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/uncompress_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="1:1"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/compress_image"
+        app:layout_constraintTop_toBottomOf="@+id/btn_handling"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btn_clear_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear image from cahce"
+        app:layout_constraintTop_toBottomOf="@+id/uncompress_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
