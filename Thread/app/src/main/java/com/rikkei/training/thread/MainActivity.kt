@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btnSlideImage.setOnClickListener {
+            val intent = Intent(this, SlideImageActivity::class.java)
+            startActivity(intent)
+        }
+
         initHandler()
 
     }
