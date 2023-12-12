@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        binding.btnCoroutineScope.setOnClickListener {
+            val intent = Intent(this, CoroutineScopeActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

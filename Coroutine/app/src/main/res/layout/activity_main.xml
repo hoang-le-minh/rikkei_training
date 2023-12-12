@@ -17,13 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btn_suspend_function"/>
+        app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_scope"/>
 
     <Button
-        android:id="@+id/btn_suspend_function"
+        android:id="@+id/btn_coroutine_scope"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Another"
+        android:text="Coroutine Scope"
         android:textSize="18sp"
         android:backgroundTint="@color/teal_700"
         app:layout_constraintStart_toStartOf="parent"
