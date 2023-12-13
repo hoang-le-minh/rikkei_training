@@ -12,6 +12,9 @@ import com.rikkei.training.coroutine.CoroutineScopeActivity
 import com.rikkei.training.coroutine.R
 import com.rikkei.training.coroutine.databinding.FragmentHomeBinding
 import com.rikkei.training.coroutine.detail.DetailFragment
+import com.rikkei.training.coroutine.multiplerequest.concurrency.ConcurrencyFragment
+import com.rikkei.training.coroutine.multiplerequest.sequential.SequentialFragment
+import com.rikkei.training.coroutine.singlerequest.SingleFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -43,9 +46,23 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnViewDetail.setOnClickListener {
-            val activity = activity as CoroutineScopeActivity
-            activity.supportFragmentManager.beginTransaction().replace(R.id.fragment, DetailFragment()).addToBackStack("detail").commit()
+            replaceFragment(DetailFragment())
         }
+
+        binding.btnSingleRequest.setOnClickListener {
+            replaceFragment(SingleFragment())
+        }
+        binding.btnMultipleRequestConcurrency.setOnClickListener {
+            replaceFragment(ConcurrencyFragment())
+        }
+        binding.btnMultipleRequestSequential.setOnClickListener {
+            replaceFragment(SequentialFragment())
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        val activity = activity as CoroutineScopeActivity
+        activity.supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack("home").commit()
     }
 
 

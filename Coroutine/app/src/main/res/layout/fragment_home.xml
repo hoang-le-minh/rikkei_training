@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btn_stop"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias="0.2"/>
+            app:layout_constraintVertical_bias="0.1"/>
 
         <Button
             android:id="@+id/btn_stop"
@@ -46,6 +46,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_stop"/>
 
+        <Button
+            android:id="@+id/btn_single_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Single Request"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_view_detail"
+            app:layout_constraintBottom_toTopOf="@+id/btn_multiple_request_concurrency"/>
 
+        <Button
+            android:id="@+id/btn_multiple_request_concurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Multiple Request Concurrency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_single_request"
+            app:layout_constraintBottom_toTopOf="@+id/btn_multiple_request_sequential"/>
+
+        <Button
+            android:id="@+id/btn_multiple_request_sequential"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Multiple Request Sequential"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_multiple_request_concurrency" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
