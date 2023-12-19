@@ -1,4 +1,4 @@
-package com.rikkei.training.hiltapp.data.database.Question
+package com.rikkei.training.hiltapp.data.database.question
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

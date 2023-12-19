@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="loginvm"
+            type="com.rikkei.training.mvvm.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:text="@={loginvm.email}"
+            android:textSize="24sp"
+            android:layout_marginTop="80dp"/>
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:text="@={loginvm.password}"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@{loginvm.messageLogin}"
+            android:textSize="18sp"
+            android:textColor="@{loginvm.isSuccess ? @color/teal_700 : @color/red}"
+            android:layout_gravity="center"
+            android:visibility="@{loginvm.isShowMsg ? View.VISIBLE : View.GONE}"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> loginvm.onclickLogin()}"
+            android:backgroundTint="@color/teal_700"/>
+
+
+    </LinearLayout>
+
+</layout>

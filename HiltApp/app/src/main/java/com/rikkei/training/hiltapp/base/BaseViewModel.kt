@@ -1,7 +1,9 @@
 package com.rikkei.training.hiltapp.base
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 
 open class BaseViewModel: ViewModel() {
@@ -16,6 +18,10 @@ open class BaseViewModel: ViewModel() {
             isLoading.postValue(false)
 
         }
+    }
+
+    protected val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("hoangminhdh11", "Error: ${throwable.message}", )
     }
 
 }
