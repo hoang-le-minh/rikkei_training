@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "439554387975",
+    "project_id": "chat-app-8cb3b",
+    "storage_bucket": "chat-app-8cb3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439554387975:android:00c89b2a6c532e0d077aa2",
+        "android_client_info": {
+          "package_name": "com.rikkei.training.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeI-UMpLq4eMl9X83CM2QVKzQ9_SDXP58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
